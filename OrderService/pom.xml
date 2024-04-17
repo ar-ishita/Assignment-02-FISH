@@ -97,7 +97,7 @@
                 <version>3.4.1</version>
                 <configuration>
                     <to>
-                        <image>ishita/${project.artifactId}:${project.version}</image>
+                        <image>microservices-tutorial/${project.artifactId}:${project.version}</image>
                     </to>
                     <container>
                         <jvmFlags>

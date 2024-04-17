@@ -14,8 +14,11 @@
     <name>ProductService</name>
     <description>ProductService</description>
     <properties>
+        <maven.compiler.source>16</maven.compiler.source>
         <java.version>17</java.version>
+        <maven.compiler.target>16</maven.compiler.target>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
         <dependency>
@@ -93,12 +96,19 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>org.assign2.productservice.ProductServiceApplication</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
                     <to>
-                        <image>ishita96/${project.artifactId}:${project.version}</image>
+                        <image>microservices-tutorial/${project.artifactId}:${project.version}</image>
                     </to>
                     <container>
                         <jvmFlags>
