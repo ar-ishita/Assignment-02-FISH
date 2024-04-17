@@ -20,7 +20,7 @@
         <module>OrderService</module>
         <module>InventoryService</module>
         <module>DiscoveryService</module>
-
+        <module>NotificationService</module>
     </modules>
 
     <properties>
@@ -70,6 +70,16 @@
                 <configuration>
                     <source>16</source>
                     <target>16</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <to>
+                        <image>registry.hub.docker.com/ishita96/${project.artifactId}</image>
+                    </to>
                 </configuration>
             </plugin>
         </plugins>

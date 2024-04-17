@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.assign2</groupId>
-    <artifactId>APIGateway</artifactId>
+    <artifactId>apigateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>APIGateway</name>
     <description>APIGateway</description>
@@ -50,6 +50,8 @@
             <version>3.2.4</version>
         </dependency>
 
+
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -68,6 +70,21 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <to>
+                        <image>ishita/${project.artifactId}:${project.version}</image>
+                    </to>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Dspring.profiles.active=prod</jvmFlag>
+                        </jvmFlags>
+                    </container>
+                </configuration>
             </plugin>
         </plugins>
     </build>

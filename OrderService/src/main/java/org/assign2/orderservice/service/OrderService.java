@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.assign2.orderservice.dto.InventoryResponse;
 import org.assign2.orderservice.dto.OrderLineItemsDto;
 import org.assign2.orderservice.dto.OrderRequest;
+import org.assign2.orderservice.event.OrderPlacedEvent;
 import org.assign2.orderservice.model.Order;
 import org.assign2.orderservice.model.OrderLineItems;
 import org.assign2.orderservice.repository.OrderRepository;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -24,7 +26,9 @@ public class OrderService {
     private final WebClient.Builder webClientBuilder;
     @Value("${inventory.service.url}")
     private String inventoryServiceUrl;
-    public void placeOrder(OrderRequest orderRequest) throws IllegalAccessException {
+
+    private final KafkaTemplate<String,OrderPlacedEvent> kafkaTemplate;
+    public String placeOrder(OrderRequest orderRequest) throws IllegalAccessException {
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
 
@@ -48,6 +52,8 @@ public class OrderService {
 
        if(allProductsInStock){
            orderRepository.save(order);
+           kafkaTemplate.send("notificationTopic", new OrderPlacedEvent(order.getOrderNumber()));
+           return "Order Placed Successfully";
        }else{
            throw new IllegalAccessException("Product is not in stock, please try again later");
        }

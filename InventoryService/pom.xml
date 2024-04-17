@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.assign2</groupId>
-    <artifactId>InventoryService</artifactId>
+    <artifactId>inventoryservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>InventoryService</name>
     <description>InventoryService</description>
@@ -72,6 +72,21 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <to>
+                        <image>ishita/${project.artifactId}:${project.version}</image>
+                    </to>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Dspring.profiles.active=prod</jvmFlag>
+                        </jvmFlags>
+                    </container>
                 </configuration>
             </plugin>
         </plugins>

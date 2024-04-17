@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.assign2</groupId>
-    <artifactId>ProductService</artifactId>
+    <artifactId>productservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ProductService</name>
     <description>ProductService</description>
@@ -92,6 +92,22 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <to>
+                        <image>ishita96/${project.artifactId}:${project.version}</image>
+                    </to>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Dspring.profiles.active=prod</jvmFlag>
+                        </jvmFlags>
+                    </container>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
